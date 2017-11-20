@@ -6,7 +6,7 @@ export class RegisterService {
   constructor() { }
 
   register(data): void {
-    console.log('register', firebase)
+
   }
 
 }
