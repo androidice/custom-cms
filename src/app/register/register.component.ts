@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../../services/register.service';
+
 import { User } from '../../models/user';
 
 @Component({
@@ -15,7 +16,12 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(event){
     event.preventDefault();
-    this.registerService.register(this.user);
+    this.registerService.register(this.user)
+    .then((result)=> {
+        console.log(result);
+    }, (error)=>{
+        console.log(error);
+    });
   }
 
   ngOnInit() {

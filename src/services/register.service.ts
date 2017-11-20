@@ -5,18 +5,16 @@ import { AngularFireAuth } from 'angularfire2/auth';
 @Injectable()
 export class RegisterService {
 
-  constructor(private afAuth: AngularFireAuth) { }
+  constructor(private afAuth: AngularFireAuth) {}
 
-  register(data): void {
-    debugger;
-    this.afAuth.auth.createUserWithEmailAndPassword(data.email, data.password)
-    .then((result)=>{
-      console.log('result', result);
-      console.log('afAuth', this.afAuth);
-      console.log('firebase', firebase);
-    },(error)=> {
-      console.log('error', error);
+  register(data): Promise<any> {
+    return new Promise((resolve, reject)=>{
+      this.afAuth.auth.createUserWithEmailAndPassword(data.email, data.password)
+      .then((result)=>{
+        resolve(result);
+      },(error) => {
+        reject(error);
+      });
     });
   }
-
 }
