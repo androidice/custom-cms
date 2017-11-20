@@ -9,19 +9,17 @@ import { User } from '../../models/user';
 })
 export class RegisterComponent implements OnInit {
 
-  user: User;
+  user: User = new User();
 
   constructor(private registerService: RegisterService) { }
 
   onSubmit(event){
     event.preventDefault();
-    console.log('submitted', this.user);
-    this.registerService.register("");
+    this.registerService.register(this.user);
   }
 
   ngOnInit() {
-    this.user = new User()
-    //this.registerService.register({});
+
   }
 
 }
