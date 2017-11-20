@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { RegisterService } from '../../services/register.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-register',
@@ -8,15 +9,19 @@ import { RegisterService } from '../../services/register.service';
 })
 export class RegisterComponent implements OnInit {
 
+  user: User;
+
   constructor(private registerService: RegisterService) { }
 
   onSubmit(event){
     event.preventDefault();
-    console.log('submitted', event);
+    console.log('submitted', this.user);
+    this.registerService.register("");
   }
 
   ngOnInit() {
-    this.registerService.register({});
+    this.user = new User()
+    //this.registerService.register({});
   }
 
 }
