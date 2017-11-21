@@ -2,13 +2,12 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/catch';
+
 
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
-
-
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/catch';
 
 import { User } from '../models';
 
@@ -21,7 +20,9 @@ export class UserService {
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
 
-  constructor(private afAuth: AngularFireAuth){}
+  constructor(private afAuth: AngularFireAuth){
+    
+  }
 
   setAuth(user: User): void {
     this.currentUserSubject.next(user);

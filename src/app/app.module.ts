@@ -13,7 +13,7 @@ import { DashBoardModule } from './dashboard/dashboard.module';
 import { AppComponent } from './app.component';
 import { FooterComponent, HeaderComponent} from './shared/layout';
 
-import { UserService } from './shared/services';
+import { UserService, AuthGuard } from './shared/services';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDw-VGTzkc8BrlibvgP-lhsY3dMBi7wDhA",
@@ -45,7 +45,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
   ],
   exports: [RouterModule],
   providers: [
-    UserService
+    UserService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
