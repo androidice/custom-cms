@@ -23,8 +23,13 @@ export class UserService {
 
   constructor(private afAuth: AngularFireAuth){}
 
+  setAuth(user: User): void {
+    this.currentUserSubject.next(user);
+    this.isAuthenticatedSubject.next(true);
+  }
+
+
   register(data): Promise<User> {
-    debugger;
     return new Promise((resolve, reject)=>{
       this.afAuth.auth.createUserWithEmailAndPassword(data.email, data.password)
       .then((result)=>{

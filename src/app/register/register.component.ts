@@ -17,9 +17,8 @@ export class RegisterComponent implements OnInit {
   onSubmit(event){
     event.preventDefault();
     this.userService.register(this.user)
-    .then((result)=> {
-        console.log('uid', result.uid);
-        alert('user created');
+    .then((user)=> {
+        this.userService.setAuth(user)
     }, (error)=>{
        alert(error.message);
     });
