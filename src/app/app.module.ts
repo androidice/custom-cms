@@ -12,7 +12,7 @@ import { RegisterModule } from './register/register.module'
 import { AppComponent } from './app.component';
 import { FooterComponent, HeaderComponent} from './shared';
 
-import { RegisterService } from '../services/register.service';
+import { RegisterService } from './shared/services/register.service';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDw-VGTzkc8BrlibvgP-lhsY3dMBi7wDhA",

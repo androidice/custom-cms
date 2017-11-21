@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterService } from '../../services/register.service';
+import { RegisterService } from '../shared/services/register.service';
 
-import { User } from '../../models/user';
+import { User } from '../shared/models/user';
 
 @Component({
   selector: 'app-register',
@@ -18,9 +18,9 @@ export class RegisterComponent implements OnInit {
     event.preventDefault();
     this.registerService.register(this.user)
     .then((result)=> {
-        console.log(result);
+        alert('user created');
     }, (error)=>{
-        console.log(error);
+       alert(error.message);
     });
   }
 
