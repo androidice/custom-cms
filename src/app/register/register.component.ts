@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { RegisterService } from '../shared/services/register.service';
+import { UserService } from '../shared/services';
 
 import { User } from '../shared/models/user';
 
@@ -12,12 +12,13 @@ export class RegisterComponent implements OnInit {
 
   user: User = new User();
 
-  constructor(private registerService: RegisterService) { }
+  constructor(private userService: UserService) { }
 
   onSubmit(event){
     event.preventDefault();
-    this.registerService.register(this.user)
+    this.userService.register(this.user)
     .then((result)=> {
+        console.log('uid', result.uid);
         alert('user created');
     }, (error)=>{
        alert(error.message);

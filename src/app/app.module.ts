@@ -10,9 +10,9 @@ import { HomeModule } from './home/home.module';
 import { RegisterModule } from './register/register.module'
 
 import { AppComponent } from './app.component';
-import { FooterComponent, HeaderComponent} from './shared';
+import { FooterComponent, HeaderComponent} from './shared/layout';
 
-import { RegisterService } from './shared/services/register.service';
+import { UserService } from './shared/services';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDw-VGTzkc8BrlibvgP-lhsY3dMBi7wDhA",
@@ -43,7 +43,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
   ],
   exports: [RouterModule],
   providers: [
-    RegisterService
+    UserService
   ],
   bootstrap: [AppComponent]
 })
