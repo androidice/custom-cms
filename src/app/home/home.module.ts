@@ -3,7 +3,7 @@ import { RouterModule } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 
-export const homeRoute: ModuleWithProviders = RouterModule.forChild([
+export const route: ModuleWithProviders = RouterModule.forChild([
    {
      path: '',
      component: HomeComponent
@@ -12,7 +12,7 @@ export const homeRoute: ModuleWithProviders = RouterModule.forChild([
 
 @NgModule({
  imports: [
-   homeRoute
+   route
  ],
  declarations: [
    HomeComponent

@@ -4,7 +4,7 @@ import { RouterModule} from '@angular/router';
 
 import { RegisterComponent } from './register.component';
 
-export const signUpRoute: ModuleWithProviders = RouterModule.forChild([
+export const route: ModuleWithProviders = RouterModule.forChild([
   {
     path: 'sign-up',
     component: RegisterComponent
@@ -13,7 +13,7 @@ export const signUpRoute: ModuleWithProviders = RouterModule.forChild([
 
 @NgModule({
   imports: [
-    signUpRoute,
+    route,
     FormsModule
   ],
   declarations: [
