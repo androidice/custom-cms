@@ -1,21 +1,23 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
-import { UserService } from './user.service';
+import { UserService } from '../shared/services';
 
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class HomeAuthResolver implements Resolve<boolean> {
   constructor(
     private router: Router,
     private userService: UserService
-  ){
-  }
+  ) {}
 
-  canActivate(
+  resolve(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ):Observable<boolean> {
+  ): Observable<boolean> {
+
     return this.userService.isAuthenticated.take(1);
+
   }
+
 }

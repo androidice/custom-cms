@@ -8,7 +8,7 @@ export const route: ModuleWithProviders = RouterModule.forChild([
   {
     path: 'dashboard',
     component: DashBoardComponent,
-    canActivate: [AuthGuard]
+    canActivate: [true]
   }
 ]);
 
