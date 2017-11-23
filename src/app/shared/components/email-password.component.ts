@@ -1,4 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewContainerRef} from '@angular/core';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { User } from '../../shared';
 import { UserService } from '../../shared'
 
@@ -8,7 +9,9 @@ import { UserService } from '../../shared'
 })
 export class EmailPasswordComponent {
 
-  constructor(private userService: UserService){}
+  constructor(private userService: UserService, public toastr: ToastsManager, vcr: ViewContainerRef){
+    this.toastr.setRootViewContainerRef(vcr);
+  }
 
   user:User = new User();
   @Input()
@@ -19,19 +22,19 @@ export class EmailPasswordComponent {
     if(this.transaction.toLowerCase() ==='signup'){
       this.userService.register(this.user)
       .then((user)=> {
+        this.toastr.success('user has been successfully created', 'Success');
         this.userService.setAuth(user);
-        alert('user created');
       }, (error) => {
-        alert(error.message);
+        this.toastr.error(error.message, 'Error');
       });
     }
     else if (this.transaction.toLowerCase() === 'signin'){
       this.userService.login(this.user)
       .then((user) => {
+          this.toastr.success('user has been successfully login', 'Success');
           this.userService.setAuth(user);
-          alert('user login');
       }, (error)=> {
-          alert(error.message);
+          this.toastr.error(error.message, 'Error');
       });
     }
   }
