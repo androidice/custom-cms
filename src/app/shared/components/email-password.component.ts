@@ -15,15 +15,28 @@ export class EmailPasswordComponent {
   transaction: string;
 
   onSubmit(event) {
-    debugger;
     event.preventDefault();
     if(this.transaction.toLowerCase() ==='signup'){
       this.userService.register(this.user)
+      .then((user)=> {
+        this.userService.setAuth(user);
+        alert('user created');
+      }, (error) => {
+        alert('error');
+      });
     }
     else if (this.transaction.toLowerCase() === 'signin'){
-      this.userService.login(this.user);
+      this.userService.login(this.user)
+      .then((user) => {
+          this.userService.setAuth(user);
+          alert('user login');
+      }, (error)=> {
+          alert('error');
+      });
     }
   }
+
+  
   ngOnInit() {
 
   }

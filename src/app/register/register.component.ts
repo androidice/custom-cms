@@ -9,8 +9,10 @@ import { User } from '../shared/models/user';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-  
+
   constructor(private userService: UserService) { }
+
+  
   ngOnInit() {
 
   }
