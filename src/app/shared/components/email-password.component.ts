@@ -11,14 +11,16 @@ export class EmailPasswordComponent {
   constructor(private userService: UserService){}
 
   user:User = new User();
-  @Input() transactionType: string;
+  @Input()
+  transaction: string;
 
   onSubmit(event) {
+    debugger;
     event.preventDefault();
-    if(this.transactionType.toLowerCase() ==='signup'){
+    if(this.transaction.toLowerCase() ==='signup'){
       this.userService.register(this.user)
     }
-    else if (this.transactionType.toLowerCase() === 'signin'){
+    else if (this.transaction.toLowerCase() === 'signin'){
       this.userService.login(this.user);
     }
   }

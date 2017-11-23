@@ -1,8 +1,9 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
 import { RouterModule} from '@angular/router';
 
 import { RegisterComponent } from './register.component';
+import { EmailPasswordComponent } from '../shared/components'
+import { SharedModule, UserService } from '../shared';
 
 export const route: ModuleWithProviders = RouterModule.forChild([
   {
@@ -14,12 +15,15 @@ export const route: ModuleWithProviders = RouterModule.forChild([
 @NgModule({
   imports: [
     route,
-    FormsModule
+    SharedModule
   ],
   declarations: [
-    RegisterComponent
+    RegisterComponent,
+    EmailPasswordComponent
   ],
-  providers: []
+  providers: [
+    UserService
+  ]
 })
 
 export class RegisterModule {}

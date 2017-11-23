@@ -9,19 +9,8 @@ import { User } from '../shared/models/user';
   styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
+  
   constructor(private userService: UserService) { }
-  //
-  // onSubmit(event){
-  //   event.preventDefault();
-  //   this.userService.register(this.user)
-  //   .then((user)=> {
-  //       this.userService.setAuth(user)
-  //   }, (error)=>{
-  //      alert(error.message);
-  //   });
-  // }
-
   ngOnInit() {
 
   }
