@@ -7,8 +7,7 @@ import { AuthGuard } from '../shared/services';
 export const route: ModuleWithProviders = RouterModule.forChild([
   {
     path: 'dashboard',
-    component: DashBoardComponent,
-    canActivate: [true]
+    component: DashBoardComponent
   }
 ]);
 
