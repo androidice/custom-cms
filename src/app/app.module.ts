@@ -13,7 +13,7 @@ import { DashBoardModule } from './dashboard/dashboard.module';
 import { AppComponent } from './app.component';
 import { FooterComponent, HeaderComponent} from './shared/layout';
 
-import { UserService, AuthGuard } from './shared/services';
+import { SharedModule, UserService, AuthGuard } from './shared';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDw-VGTzkc8BrlibvgP-lhsY3dMBi7wDhA",
@@ -34,14 +34,13 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
   ],
   imports: [
     BrowserModule,
-    FormsModule,
-    HomeModule,
     RegisterModule,
     DashBoardModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
-    rootRouting
+    rootRouting,
+    SharedModule
   ],
   exports: [RouterModule],
   providers: [

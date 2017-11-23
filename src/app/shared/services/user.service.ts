@@ -21,7 +21,7 @@ export class UserService {
 
 
   constructor(private afAuth: AngularFireAuth){
-    
+
   }
 
   setAuth(user: User): void {
@@ -33,7 +33,7 @@ export class UserService {
   register(data): Promise<User> {
     return new Promise((resolve, reject)=>{
       this.afAuth.auth.createUserWithEmailAndPassword(data.email, data.password)
-      .then((result)=>{
+      .then((result)=> {
         let user = new User();
         user.displayName = result.displayName;
         user.email = result.email,
@@ -46,6 +46,51 @@ export class UserService {
         resolve(user);
       },(error) => {
         reject(error);
+      });
+    });
+  }
+
+  login(data): Promise<User> {
+    return new Promise((resolve, reject)=> {
+      this.afAuth.auth.signInWithEmailAndPassword(data.email, data.password)
+      .then((result)=> {
+        let user = new User();
+        user.displayName = result.displayName;
+        user.email = result.email,
+        user.emailVerified = result.emailVerified;
+        user.isAnonymous = result.isAnonymous;
+        user.photoURL = result.photoURL;
+        user.providerData = result.providerData;
+        user.refreshToken = result.refreshToken;
+        user.uid = result.uid;
+        resolve(user);
+      }, (error)=> {
+        reject(error);
+      });
+    });
+  }
+
+  getCurrentUser(): User {
+    return this.currentUserSubject.value;
+  }
+
+  onAuthStateChanged(): Promise<User> {
+    return new Promise((resolve, reject)=>{
+      this.afAuth.auth.onAuthStateChanged((result)=> {
+        if(result){
+          let user = new User();
+          user.displayName = result.displayName;
+          user.email = result.email,
+          user.emailVerified = result.emailVerified;
+          user.isAnonymous = result.isAnonymous;
+          user.photoURL = result.photoURL;
+          user.providerData = result.providerData;
+          user.refreshToken = result.refreshToken;
+          user.uid = result.uid;
+          resolve(user);
+        }else{
+          resolve(null);
+        }
       });
     });
   }
