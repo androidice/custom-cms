@@ -4,7 +4,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
-
+import 'rxjs/add/operator/take';
 
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -26,7 +26,11 @@ export class UserService {
 
   setAuth(user: User): void {
     this.currentUserSubject.next(user);
-    this.isAuthenticatedSubject.next(true);
+    if(user){
+      this.isAuthenticatedSubject.next(true);
+    }else{
+      this.isAuthenticatedSubject.next(false);
+    }
   }
 
 
@@ -75,6 +79,7 @@ export class UserService {
   }
 
   onAuthStateChanged(): Promise<User> {
+    debugger;
     return new Promise((resolve, reject)=>{
       this.afAuth.auth.onAuthStateChanged((result)=> {
         if(result){
