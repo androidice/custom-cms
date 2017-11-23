@@ -34,6 +34,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
   ],
   imports: [
     BrowserModule,
+    HomeModule,
     RegisterModule,
     DashBoardModule,
     AngularFireModule.initializeApp(firebaseConfig),

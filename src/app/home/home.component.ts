@@ -16,11 +16,11 @@ export class HomeComponent implements OnInit{
 
   isAuthenticated: boolean = false;
   ngOnInit(){
-    this.userService.isAuthenticated.subscribe((authenticated) => {
-      this.isAuthenticated = authenticated;
-      if(authenticated){
-        this.router.navigateByUrl('/dashboard');
-      }
-    });
+    // this.userService.isAuthenticated.subscribe((authenticated) => {
+    //   this.isAuthenticated = authenticated;
+    //   if(authenticated){
+    //     this.router.navigateByUrl('/dashboard');
+    //   }
+    // });
   }
 }

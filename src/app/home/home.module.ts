@@ -7,10 +7,7 @@ import { HomeAuthResolver } from './home-auth-resolver.service';
 export const route: ModuleWithProviders = RouterModule.forChild([
    {
      path: '',
-     component: HomeComponent,
-     resolve: {
-       isAuthenticated: HomeAuthResolver
-     }
+     component: HomeComponent
    }
 ]);
 
