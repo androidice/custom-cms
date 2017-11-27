@@ -12,16 +12,10 @@ import { UserService } from '../shared/services';
 })
 
 export class HomeComponent implements OnInit{
-  constructor(private router: Router, private userService: UserService){}
+  constructor(private router: Router, private userService: UserService){
+  }
 
-  isAuthenticated: boolean = false;
   ngOnInit(){
-    debugger;
-    this.userService.isAuthenticated.subscribe((authenticated) => {
-      this.isAuthenticated = authenticated;
-      if(authenticated){
-        this.router.navigateByUrl('/dashboard');
-      }
-    });
+    
   }
 }

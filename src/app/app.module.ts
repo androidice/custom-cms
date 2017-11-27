@@ -7,10 +7,12 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { HomeModule } from './home/home.module';
+import { LoginModule } from './login/login.module'
 import { RegisterModule } from './register/register.module';
 import { DashBoardModule } from './dashboard/dashboard.module';
 
 import { AppComponent } from './app.component';
+
 import { FooterComponent, HeaderComponent} from './shared/layout';
 
 import { SharedModule, UserService, AuthGuard } from './shared';
@@ -34,6 +36,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
   ],
   imports: [
     HomeModule,
+    LoginModule,
     RegisterModule,
     DashBoardModule,
     AngularFireModule.initializeApp(firebaseConfig),

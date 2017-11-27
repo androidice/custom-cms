@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { UserService } from './shared';
 
 @Component({
@@ -7,13 +8,26 @@ import { UserService } from './shared';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor(private UserService: UserService){}
+  isAuthenticated: boolean = false;
+  constructor(private router: Router,  private userService: UserService){
+    debugger;
+    this.userService.isAuthenticated.subscribe((authenticated) => {
+      this.isAuthenticated = authenticated;
+      if(authenticated){
+        this.router.navigateByUrl('/dashboard');
+      }else {
+        this.router.navigateByUrl('/');
+      }
+    });
+  }
+
   title = 'app';
 
   ngOnInit(){
-    this.UserService.onAuthStateChanged().then(
+    debugger;
+    this.userService.onAuthStateChanged().then(
       (user)=> {
-        this.UserService.setAuth(user);
+        this.userService.setAuth(user);
       }
     )
   }

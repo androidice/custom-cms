@@ -1,16 +1,16 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule} from '@angular/router';
 
-import { RegisterComponent } from './register.component';
+import { LoginComponent } from './login.component';
 import { EmailPasswordComponent } from '../shared/components'
 import { SharedModule, UserService } from '../shared';
 
-export const route: ModuleWithProviders = RouterModule.forChild([
-  {
-    path: 'sign-up',
-    component: RegisterComponent
-  }
-])
+export const route:ModuleWithProviders = RouterModule.forChild(
+  [{
+    path: 'login',
+    component: LoginComponent
+  }]
+)
 
 @NgModule({
   imports: [
@@ -18,11 +18,11 @@ export const route: ModuleWithProviders = RouterModule.forChild([
     SharedModule
   ],
   declarations: [
-    RegisterComponent
+    LoginComponent
   ],
   providers: [
     UserService
   ]
 })
 
-export class RegisterModule {}
+export class LoginModule{}

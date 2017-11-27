@@ -18,6 +18,7 @@ export class EmailPasswordComponent {
   transaction: string;
 
   onSubmit(event, form) {
+    debugger;
     event.preventDefault();
     if(this.transaction.toLowerCase() ==='signup'){
       this.userService.register(this.user)

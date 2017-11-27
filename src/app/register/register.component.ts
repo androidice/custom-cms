@@ -1,18 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../shared/services';
-
-import { User } from '../shared/models/user';
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent  {
 
-  constructor(private userService: UserService) { }
+  constructor() { }
 
-  
+
   ngOnInit() {
 
   }

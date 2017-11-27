@@ -25,6 +25,7 @@ export class UserService {
   }
 
   setAuth(user: User): void {
+    debugger;
     this.currentUserSubject.next(user);
     if(user){
       this.isAuthenticatedSubject.next(true);
@@ -79,7 +80,6 @@ export class UserService {
   }
 
   onAuthStateChanged(): Promise<User> {
-    debugger;
     return new Promise((resolve, reject)=>{
       this.afAuth.auth.onAuthStateChanged((result)=> {
         if(result){
@@ -97,6 +97,20 @@ export class UserService {
           resolve(null);
         }
       });
+    });
+  }
+
+  logOut(): Promise<boolean> {
+    return new Promise((resolve, reject)=>{
+      this.afAuth.auth.signOut().then(()=>{
+        localStorage.clear();
+        sessionStorage.clear();
+        resolve(true);
+      },
+       (error) => {
+         reject(error);
+       }
+     );
     });
   }
 }

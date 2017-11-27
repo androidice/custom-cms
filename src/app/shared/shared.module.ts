@@ -6,8 +6,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
-import { ShowAuthedDirective } from './show-authed.directive';
-
+import { ShowAuthedDirective } from './directives';
+import { EmailPasswordComponent } from './components';
 
 @NgModule({
   imports: [
@@ -20,12 +20,14 @@ import { ShowAuthedDirective } from './show-authed.directive';
     ReactiveFormsModule
   ],
   declarations: [
-    ShowAuthedDirective
+    ShowAuthedDirective,
+    EmailPasswordComponent
   ],
   exports: [
     CommonModule,
     FormsModule,
     RouterModule,
+    EmailPasswordComponent,
     ReactiveFormsModule,
     ShowAuthedDirective
   ]
