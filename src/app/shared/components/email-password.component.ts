@@ -9,7 +9,9 @@ import { UserService } from '../../shared'
 })
 export class EmailPasswordComponent {
 
-  constructor(private userService: UserService, public toastr: ToastsManager, vcr: ViewContainerRef){
+  constructor(private userService: UserService,
+              public toastr: ToastsManager,
+              vcr: ViewContainerRef){
     this.toastr.setRootViewContainerRef(vcr);
   }
 

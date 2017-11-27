@@ -8,27 +8,15 @@ import { UserService } from './shared';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  isAuthenticated: boolean = false;
-  constructor(private router: Router,  private userService: UserService){
-    debugger;
-    this.userService.isAuthenticated.subscribe((authenticated) => {
-      this.isAuthenticated = authenticated;
-      if(authenticated){
-        this.router.navigateByUrl('/dashboard');
-      }else {
-        this.router.navigateByUrl('/');
-      }
-    });
-  }
 
+  constructor(private router: Router,  private userService: UserService){
+
+  }
+  
+  isAuthenticated: boolean = false;
   title = 'app';
 
   ngOnInit(){
-    debugger;
-    this.userService.onAuthStateChanged().then(
-      (user)=> {
-        this.userService.setAuth(user);
-      }
-    )
+
   }
 }
