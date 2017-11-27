@@ -1,4 +1,5 @@
 import { Component, Input, ViewContainerRef} from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { User } from '../../shared';
 import { UserService } from '../../shared'
@@ -9,7 +10,9 @@ import { UserService } from '../../shared'
 })
 export class EmailPasswordComponent {
 
-  constructor(private userService: UserService,
+  constructor(
+              private router: Router,
+              private userService: UserService,
               public toastr: ToastsManager,
               vcr: ViewContainerRef){
     this.toastr.setRootViewContainerRef(vcr);
@@ -20,13 +23,13 @@ export class EmailPasswordComponent {
   transaction: string;
 
   onSubmit(event, form) {
-    debugger;
     event.preventDefault();
     if(this.transaction.toLowerCase() ==='signup'){
       this.userService.register(this.user)
       .then((user)=> {
         this.toastr.success('user has been successfully created', 'Success');
         this.userService.setAuth(user);
+        this.router.navigateByUrl('/dashboard');
       }, (error) => {
         this.toastr.error(error.message, 'Error');
       });
@@ -36,6 +39,7 @@ export class EmailPasswordComponent {
       .then((user) => {
           this.toastr.success('user has been successfully login', 'Success');
           this.userService.setAuth(user);
+          this.router.navigateByUrl('/dashboard');
       }, (error)=> {
           this.toastr.error(error.message, 'Error');
       });

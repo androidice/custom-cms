@@ -9,14 +9,16 @@ import { UserService } from './shared';
 })
 export class AppComponent {
 
-  constructor(private router: Router,  private userService: UserService){
-
+  constructor(
+    private router: Router,
+    private userService: UserService){
   }
-  
-  isAuthenticated: boolean = false;
+
   title = 'app';
 
   ngOnInit(){
-
+    this.userService.onAuthStateChanged().then((user)=>{
+      this.userService.setAuth(user)
+    })
   }
 }

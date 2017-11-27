@@ -8,6 +8,7 @@ import { AngularFireAuthModule } from 'angularfire2/auth';
 
 import { HomeModule } from './home/home.module';
 import { LoginModule } from './login/login.module'
+import { ProfileModule } from './profile/profile.module';
 import { RegisterModule } from './register/register.module';
 import { DashBoardModule } from './dashboard/dashboard.module';
 
@@ -39,6 +40,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
     LoginModule,
     RegisterModule,
     DashBoardModule,
+    ProfileModule,
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
