@@ -6,5 +6,14 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class ProfileComponent {
-  constructor(){}
+  data: any;
+
+  constructor(){
+    this.data = {};
+  }
+
+  onSubmit(event){
+    event.preventDefault();
+    console.log('data', this.data);
+  }
 }

@@ -1,3 +1,9 @@
 <div>
   <h2>Profile</h2>
+  <form (submit)="onSubmit($event)"> 
+    <image-cropper [(data)]="data"></image-cropper>
+    <button type="submit" class="btn btn-success">
+      Submit
+    </button>
+  </form>
 </div>

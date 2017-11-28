@@ -1,4 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { ImageCropperComponent } from 'ng2-img-cropper';
+import { ImageCropper } from './components';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ToastModule} from 'ng2-toastr/ng2-toastr';
 import { CommonModule } from '@angular/common';
@@ -21,13 +23,17 @@ import { EmailPasswordComponent } from './components';
   ],
   declarations: [
     ShowAuthedDirective,
-    EmailPasswordComponent
+    EmailPasswordComponent,
+    ImageCropperComponent,
+    ImageCropper
   ],
   exports: [
     CommonModule,
     FormsModule,
     RouterModule,
     EmailPasswordComponent,
+    ImageCropperComponent,
+    ImageCropper,
     ReactiveFormsModule,
     ShowAuthedDirective
   ]
