@@ -8,6 +8,7 @@ import 'rxjs/add/operator/take';
 
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { AngularFirestore } from 'angularfire2/firestore';
 
 import { User } from '../models';
 
@@ -20,7 +21,8 @@ export class UserService {
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
 
-  constructor(private afAuth: AngularFireAuth){
+  constructor(private afAuth: AngularFireAuth,
+              private afStore: AngularFirestore){
 
   }
 
@@ -47,7 +49,20 @@ export class UserService {
         user.providerData = result.providerData;
         user.refreshToken = result.refreshToken;
         user.uid = result.uid;
-        resolve(user);
+          debugger;
+        this.afStore.collection('users').doc(user.uid).set(
+          {
+            id: user.uid,
+            email: user.email
+          }
+        )
+        .then((document)=>{
+          resolve(user)
+        })
+        .catch((error)=>{
+          resolve(error);
+        });
+
       },(error) => {
         reject(error);
       });

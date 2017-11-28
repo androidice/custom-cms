@@ -3,7 +3,6 @@ import { RouterModule} from '@angular/router';
 import { ProfileComponent } from './profile.component';
 import { SharedModule, UserService, UploadService} from '../shared';
 
-
 export const route:ModuleWithProviders = RouterModule.forChild(
   [{
     path: 'profile',

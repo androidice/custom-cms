@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
-
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { HomeModule } from './home/home.module';
 import { LoginModule } from './login/login.module'
 import { ProfileModule } from './profile/profile.module';
@@ -45,6 +45,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
     AngularFireModule.initializeApp(firebaseConfig),
     AngularFireDatabaseModule,
     AngularFireAuthModule,
+    AngularFirestoreModule,
     rootRouting,
     SharedModule
   ],
@@ -52,7 +53,7 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
   providers: [
     UserService,
     AuthGuard,
-    UploadService
+    UploadService,
   ],
   bootstrap: [AppComponent]
 })
