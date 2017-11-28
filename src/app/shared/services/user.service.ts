@@ -25,7 +25,6 @@ export class UserService {
   }
 
   setAuth(user: User): void {
-    debugger;
     this.currentUserSubject.next(user);
     if(user){
       this.isAuthenticatedSubject.next(true);

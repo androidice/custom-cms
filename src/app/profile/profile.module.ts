@@ -1,7 +1,7 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { RouterModule} from '@angular/router';
 import { ProfileComponent } from './profile.component';
-import { SharedModule, UserService } from '../shared';
+import { SharedModule, UserService, UploadService} from '../shared';
 
 
 export const route:ModuleWithProviders = RouterModule.forChild(
@@ -20,7 +20,8 @@ export const route:ModuleWithProviders = RouterModule.forChild(
     ProfileComponent
   ],
   providers: [
-    UserService
+    UserService,
+    UploadService
   ]
 })
 

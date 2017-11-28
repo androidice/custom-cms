@@ -17,6 +17,7 @@ import { AppComponent } from './app.component';
 import { FooterComponent, HeaderComponent} from './shared/layout';
 
 import { SharedModule, UserService, AuthGuard } from './shared';
+import { UploadService } from './shared/services';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDw-VGTzkc8BrlibvgP-lhsY3dMBi7wDhA",
@@ -50,7 +51,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
   exports: [RouterModule],
   providers: [
     UserService,
-    AuthGuard
+    AuthGuard,
+    UploadService
   ],
   bootstrap: [AppComponent]
 })

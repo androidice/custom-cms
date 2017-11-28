@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewContainerRef} from '@angular/core';
+import { User, UploadService, UserService} from '../shared';
+import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 
 @Component({
   selector: 'profile',
@@ -7,13 +9,31 @@ import { Component, OnInit } from '@angular/core';
 
 export class ProfileComponent {
   data: any;
+  user: User;
 
-  constructor(){
+  constructor(private userService: UserService,
+              private uploadService: UploadService,
+              public toastr: ToastsManager,
+              vcr: ViewContainerRef){
+    this.toastr.setRootViewContainerRef(vcr);
     this.data = {};
   }
 
   onSubmit(event){
     event.preventDefault();
-    console.log('data', this.data);
+    this.uploadService.uploadProfileImage(this.user, this.data.image)
+      .then(()=> {
+          this.toastr.success('image successfully uploaded', 'Success');
+      },(error)=> {
+        this.toastr.error(error.message, 'Error');
+      });
   }
+
+
+  ngOnInit() {
+      this.userService.currentUser.subscribe((currentUser)=>{
+        this.user = currentUser;
+      });
+  }
+
 }
