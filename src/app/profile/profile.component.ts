@@ -10,6 +10,7 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class ProfileComponent {
   data: any;
   user: User;
+  imgSrc:string;
 
   constructor(private userService: UserService,
               private uploadService: UploadService,
@@ -31,9 +32,15 @@ export class ProfileComponent {
 
 
   ngOnInit() {
-      this.userService.currentUser.subscribe((currentUser)=>{
+      this.userService.onAuthStateChanged()
+      .then((currentUser)=>{
         this.user = currentUser;
-      });
+        debugger;
+        this.uploadService.getProfileImage(this.user)
+        .then((result)=>{
+          this.imgSrc = result['imgSrc'];
+        });
+      })
   }
 
 }

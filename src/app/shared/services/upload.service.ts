@@ -25,8 +25,10 @@ export class UploadService {
           .then((snapshot)=> {
             this.afStore.collection('users').doc(user.uid).update({
               profile: {
-                path,
-                filename: user.uid
+                image: {
+                  path,
+                  filename: user.uid
+                }
               }
             }).then(()=>{
               resolve(true);
@@ -43,7 +45,34 @@ export class UploadService {
 
   }
 
-  getProfileImage() {
+  getProfileImage(user): Promise<object> {
+    return new Promise((resolve, reject)=>{
+      try{
+        let storage = this.firebaseApp.storage();
+        this.afStore.collection('users').doc(user.uid).ref.get()
+        .then((doc) => {
+          if(doc && doc.exists){
+            let profile = doc.data().profile || {};
+            var imgReference = storage.ref(profile.image.path || '');;
+            imgReference.getDownloadURL()
+            .then((url)=>{
+              let result = {
+                imgSrc: url,
+                path: profile.image.path,
+                filename: profile.image.filename
+              }
+              resolve(result);
+            });
 
+          }
+        })
+        .catch((error) => {
+            reject(error);
+        });
+      }
+      catch(error){
+        reject(error);
+      }
+    });
   }
 }

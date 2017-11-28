@@ -2,6 +2,7 @@
   <h2>Profile: {{user.email}}</h2>
   <form (submit)="onSubmit($event)">
     <image-cropper [(data)]="data"></image-cropper>
+    <img [src]="imgSrc" alt="image">
     <button type="submit" class="btn btn-success">
       Submit
     </button>
