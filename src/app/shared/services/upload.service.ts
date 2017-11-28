@@ -3,11 +3,13 @@ import { FirebaseApp } from 'angularfire2';
 import { Observable } from 'rxjs/Rx';
 import { ReplaySubject } from 'rxjs/ReplaySubject';
 import * as firebase from 'firebase';
+import { AngularFirestore } from 'angularfire2/firestore';
 import 'firebase/storage';
 
 @Injectable()
 export class UploadService {
-  constructor(private firebaseApp: FirebaseApp) {
+  constructor(private firebaseApp: FirebaseApp,
+              private afStore: AngularFirestore) {
 
   }
 
@@ -17,17 +19,31 @@ export class UploadService {
         let storageRef = this.firebaseApp.storage().ref();
         let path = `/images/profile/${user.uid}`;
         var iRef = storageRef.child(path);
-        iRef.putString(img.replace('data:image/jpeg;base64,','') , 'base64', {contentType: 'image/png'})
+        img = img.replace('data:image/jpeg;base64,','') ;
+        img = img.replace('data:image/png;base64,','') ;
+        iRef.putString(img , 'base64', {contentType: 'image/png'})
           .then((snapshot)=> {
-            //TODO add/ update user here with angular fire database
-            resolve(true);
+            this.afStore.collection('users').doc(user.uid).update({
+              profile: {
+                path,
+                filename: user.uid
+              }
+            }).then(()=>{
+              resolve(true);
+            })
+            .catch((error)=> {
+              reject(error);
+            })
           });
       }
       catch(error){
-        console.log(error);
         reject(error);
       }
     })
+
+  }
+
+  getProfileImage() {
 
   }
 }

@@ -49,7 +49,6 @@ export class UserService {
         user.providerData = result.providerData;
         user.refreshToken = result.refreshToken;
         user.uid = result.uid;
-          debugger;
         this.afStore.collection('users').doc(user.uid).set(
           {
             id: user.uid,
