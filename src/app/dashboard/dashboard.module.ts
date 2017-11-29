@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { DashBoardComponent } from './dashboard.component';
 import { AuthGuard } from '../shared/services';
 
-export const route: ModuleWithProviders = RouterModule.forChild([
+export const dashboardRoute: ModuleWithProviders = RouterModule.forChild([
   {
     path: 'dashboard',
     component: DashBoardComponent
@@ -13,7 +13,7 @@ export const route: ModuleWithProviders = RouterModule.forChild([
 
 @NgModule({
   imports: [
-    route
+    dashboardRoute
   ],
   declarations: [
     DashBoardComponent

@@ -5,7 +5,7 @@ import { LoginComponent } from './login.component';
 import { EmailPasswordComponent } from '../shared/components'
 import { SharedModule, UserService } from '../shared';
 
-export const route:ModuleWithProviders = RouterModule.forChild(
+export const loginRoute:ModuleWithProviders = RouterModule.forChild(
   [{
     path: 'login',
     component: LoginComponent
@@ -14,7 +14,7 @@ export const route:ModuleWithProviders = RouterModule.forChild(
 
 @NgModule({
   imports: [
-    route,
+    loginRoute,
     SharedModule
   ],
   declarations: [

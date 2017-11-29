@@ -5,7 +5,7 @@ import { HomeComponent } from './home.component';
 import { HomeAuthResolver } from './home-auth-resolver.service';
 import { SharedModule } from '../shared';
 
-export const route: ModuleWithProviders = RouterModule.forChild([
+export const homeRoute: ModuleWithProviders = RouterModule.forChild([
    {
      path: '',
      component: HomeComponent,
@@ -17,7 +17,7 @@ export const route: ModuleWithProviders = RouterModule.forChild([
 
 @NgModule({
  imports: [
-   route,
+   homeRoute,
    SharedModule
  ],
  declarations: [

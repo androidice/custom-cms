@@ -3,7 +3,7 @@ import { RouterModule} from '@angular/router';
 import { ProfileComponent } from './profile.component';
 import { SharedModule, UserService, UploadService} from '../shared';
 
-export const route:ModuleWithProviders = RouterModule.forChild(
+export const profileRoute:ModuleWithProviders = RouterModule.forChild(
   [{
     path: 'profile',
     component: ProfileComponent
@@ -12,7 +12,7 @@ export const route:ModuleWithProviders = RouterModule.forChild(
 
 @NgModule({
   imports: [
-    route,
+    profileRoute,
     SharedModule
   ],
   declarations: [
