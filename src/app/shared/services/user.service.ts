@@ -11,6 +11,7 @@ import { AngularFireAuth } from 'angularfire2/auth';
 import { AngularFirestore } from 'angularfire2/firestore';
 
 import { User } from '../models';
+import { UploadService } from './upload.service';
 
 @Injectable()
 export class UserService {
@@ -22,7 +23,8 @@ export class UserService {
 
 
   constructor(private afAuth: AngularFireAuth,
-              private afStore: AngularFirestore){
+              private afStore: AngularFirestore,
+              private uploadService: UploadService){
 
   }
 
@@ -37,22 +39,24 @@ export class UserService {
 
 
   register(data): Promise<User> {
+    debugger;
     return new Promise((resolve, reject)=>{
       this.afAuth.auth.createUserWithEmailAndPassword(data.email, data.password)
       .then((result)=> {
         let user = new User();
-        user.displayName = result.displayName;
+        user.displayName = data['displayName'];
         user.email = result.email,
         user.emailVerified = result.emailVerified;
         user.isAnonymous = result.isAnonymous;
-        user.photoURL = result.photoURL;
         user.providerData = result.providerData;
         user.refreshToken = result.refreshToken;
         user.uid = result.uid;
         this.afStore.collection('users').doc(user.uid).set(
           {
             id: user.uid,
-            email: user.email
+            email: user.email,
+            displayName: data['displayName'],
+            profile: data['profile']
           }
         )
         .then((document)=>{
@@ -77,7 +81,7 @@ export class UserService {
         user.email = result.email,
         user.emailVerified = result.emailVerified;
         user.isAnonymous = result.isAnonymous;
-        user.photoURL = result.photoURL;
+        user.profile = result['profile'];
         user.providerData = result.providerData;
         user.refreshToken = result.refreshToken;
         user.uid = result.uid;
@@ -94,22 +98,36 @@ export class UserService {
 
   onAuthStateChanged(): Promise<User> {
     return new Promise((resolve, reject)=>{
-      this.afAuth.auth.onAuthStateChanged((result)=> {
-        if(result){
-          let user = new User();
-          user.displayName = result.displayName;
-          user.email = result.email,
-          user.emailVerified = result.emailVerified;
-          user.isAnonymous = result.isAnonymous;
-          user.photoURL = result.photoURL;
-          user.providerData = result.providerData;
-          user.refreshToken = result.refreshToken;
-          user.uid = result.uid;
-          resolve(user);
-        }else{
-          resolve(null);
-        }
-      });
+      try {
+        this.afAuth.auth.onAuthStateChanged((result)=> {
+          if(result){
+            debugger;
+            this.afStore.collection('users').doc(result.uid).ref.get()
+            .then((doc) => {
+              if(doc.exists){
+                let _data = doc.data();
+                let user = new User();
+                user.displayName = _data['displayName'];
+                user.email = result.email,
+                user.emailVerified = result.emailVerified;
+                user.isAnonymous = result.isAnonymous;
+                user.providerData = result.providerData;
+                user.refreshToken = result.refreshToken;
+                user.profile = _data['profile'];
+                user.uid = result.uid;
+                resolve(user);
+              }else {
+                resolve(null);
+              }
+            })
+          }else{
+            resolve(null);
+          }
+        });
+      }
+      catch(error){
+        reject(error);
+      }
     });
   }
 

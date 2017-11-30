@@ -1,6 +1,20 @@
 <div>
   <form (submit)="onSubmit($event, form);" novalidate #form="ngForm">
       <div class="form-group">
+         <label for="name">Name</label>
+         <input type="text"
+         [(ngModel)]="user.displayName"
+         class="form-control"
+         #name="ngModel"
+         id="name"
+         name="name"
+         placeholder="Name"
+         required>
+         <div class="alert alert-danger" *ngIf="name.touched && !name.valid">
+             <div *ngIf="name.errors.required">
+               Name is required
+             </div>
+         </div>
       </div>
        <div class="form-group">
          <label for="email">Email</label>

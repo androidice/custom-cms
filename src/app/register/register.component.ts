@@ -23,6 +23,7 @@ export class RegisterComponent  {
 
   onSubmit(event, form) {
     event.preventDefault();
+    debugger;
     this.userService.register(this.user)
     .then((user)=> {
       this.toastr.success('user has been successfully created', 'Success');

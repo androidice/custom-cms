@@ -4,8 +4,14 @@ export class User {
   displayName:string = '';
   emailVerified:boolean = false;
   isAnonymous:boolean = false;
-  photoURL: string = '';
   providerData: object = {};
   refreshToken: string = '';
+  profile:object = {
+    image: {
+      path: '',
+      filenae: '',
+      imgUrl: ''
+    }
+  };
   uid: string = '';
 }

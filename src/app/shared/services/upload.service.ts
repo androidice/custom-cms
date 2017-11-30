@@ -16,45 +16,49 @@ export class UploadService {
   uploadProfileImage(user, img): Promise<boolean> {
     return new Promise((resolve, reject)=>{
       try {
+        debugger;
         let storageRef = this.firebaseApp.storage().ref();
         let path = `/images/profile/${user.uid}`;
         var iRef = storageRef.child(path);
-        img = img.replace('data:image/jpeg;base64,','') ;
-        img = img.replace('data:image/png;base64,','') ;
-        iRef.putString(img , 'base64', {contentType: 'image/png'})
+        iRef.putString(img.substr(img.indexOf(',') + 1) , 'base64', {contentType: 'image/png'})
           .then((snapshot)=> {
-            this.afStore.collection('users').doc(user.uid).update({
+            return this.afStore.collection('users').doc(user.uid).update({
               profile: {
                 image: {
                   path,
                   filename: user.uid
                 }
               }
-            }).then(()=>{
-              resolve(true);
             })
-            .catch((error)=> {
-              reject(error);
-            })
+          })
+          .then(()=> {
+              return this.getDownloadURL(path);
+          })
+          .then((imgSrc)=> {
+              return this.afStore.collection('users').doc(user.uid).update({
+              "profile.image.imgUrl": imgSrc
+              })
+          }).then(()=>{
+            resolve(true);
+          })
+          .catch((error)=> {
+            reject(error)
           });
       }
       catch(error){
         reject(error);
       }
     })
-
   }
 
   getProfileImage(user): Promise<object> {
     return new Promise((resolve, reject)=>{
       try{
-        let storage = this.firebaseApp.storage();
         this.afStore.collection('users').doc(user.uid).ref.get()
         .then((doc) => {
           if(doc && doc.exists){
             let profile = doc.data().profile || {};
-            var imgReference = storage.ref(profile.image.path || '');;
-            imgReference.getDownloadURL()
+            this.getDownloadURL(profile.image.path)
             .then((url)=>{
               let result = {
                 imgSrc: url,
@@ -63,7 +67,6 @@ export class UploadService {
               }
               resolve(result);
             });
-
           }
         })
         .catch((error) => {
@@ -72,6 +75,21 @@ export class UploadService {
       }
       catch(error){
         reject(error);
+      }
+    });
+  }
+
+  getDownloadURL(imagePath): Promise<string> {
+    return new Promise((resolve, reject)=> {
+      try{
+        let storage = this.firebaseApp.storage();
+        var imgReference = storage.ref(imagePath || '');
+        imgReference.getDownloadURL()
+        .then((url)=>{
+          resolve(url);
+        })
+      }catch(error) {
+        resolve(error);
       }
     });
   }
