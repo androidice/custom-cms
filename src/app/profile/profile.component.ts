@@ -10,14 +10,17 @@ import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 export class ProfileComponent {
   data: any;
   user: User;
-  imgSrc:string;
+  imgSrc:string = '';
 
   constructor(private userService: UserService,
               private uploadService: UploadService,
               public toastr: ToastsManager,
               vcr: ViewContainerRef){
     this.toastr.setRootViewContainerRef(vcr);
-    this.data = {};
+    this.user = new User();
+    this.data = {
+      image: ''
+    };
   }
 
   onSubmit(event){
@@ -35,7 +38,6 @@ export class ProfileComponent {
       this.userService.onAuthStateChanged()
       .then((currentUser)=>{
         this.user = currentUser;
-        debugger;
         this.uploadService.getProfileImage(this.user)
         .then((result)=>{
           this.imgSrc = result['imgSrc'];
