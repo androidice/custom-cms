@@ -9,8 +9,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 import { ShowAuthedDirective } from './directives';
-import { EmailPasswordComponent } from './components';
-
 
 @NgModule({
   imports: [
@@ -24,7 +22,6 @@ import { EmailPasswordComponent } from './components';
   ],
   declarations: [
     ShowAuthedDirective,
-    EmailPasswordComponent,
     ImageCropperComponent,
     ImageCropper
   ],
@@ -32,7 +29,6 @@ import { EmailPasswordComponent } from './components';
     CommonModule,
     FormsModule,
     RouterModule,
-    EmailPasswordComponent,
     ImageCropperComponent,
     ImageCropper,
     ReactiveFormsModule,
