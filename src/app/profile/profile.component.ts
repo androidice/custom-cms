@@ -47,7 +47,7 @@ export class ProfileComponent {
    this.displayCropper();
   }
 
-  hideCropper(){
+  hideCropper() {
     this.el.nativeElement.querySelector('.crop-container').style.display="none";
     this.el.nativeElement.querySelector('.croped-image').style.display="block";
   }
@@ -69,7 +69,6 @@ export class ProfileComponent {
   }
 
   ngAfterViewInit() {
-    console.log('ngAfterViewInit');
     this.hideCropper();
   }
 }

@@ -1,4 +1,5 @@
 <div class="profile">
+  <h2>Name: {{user.displayName}}</h2>
   <h2>Profile: {{user.email}}</h2>
   <form (submit)="onSubmit($event)">
     <image-cropper [(data)]="data"></image-cropper>
