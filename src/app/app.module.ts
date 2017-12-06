@@ -13,11 +13,13 @@ import { RegisterModule } from './register/register.module';
 import { DashBoardModule } from './dashboard/dashboard.module';
 
 import { AppComponent } from './app.component';
+import { GrowlModule } from 'primeng/primeng';
 
 import { FooterComponent, HeaderComponent} from './shared/layout';
 
-import { SharedModule, UserService, AuthGuard } from './shared';
-import { UploadService } from './shared/services';
+import { SharedModule, UserService, AuthGuard,
+         UploadService, NotificationService} from './shared';
+
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDw-VGTzkc8BrlibvgP-lhsY3dMBi7wDhA",
@@ -47,13 +49,15 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
     AngularFireAuthModule,
     AngularFirestoreModule,
     rootRouting,
-    SharedModule
+    SharedModule,
+    GrowlModule
   ],
   exports: [RouterModule],
   providers: [
     UserService,
     AuthGuard,
     UploadService,
+    NotificationService
   ],
   bootstrap: [AppComponent]
 })
