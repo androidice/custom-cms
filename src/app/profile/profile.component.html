@@ -1,8 +1,9 @@
-<div>
+<div class="profile">
   <h2>Profile: {{user.email}}</h2>
   <form (submit)="onSubmit($event)">
     <image-cropper [(data)]="data"></image-cropper>
-    <img [src]="imgSrc" alt="image">
+    <img [src]="imgSrc" alt="image" class="croped-image">
+    <a (click)="changeAvatar($event)">Change Avatar</a>
     <button type="submit" class="btn btn-success">
       Submit
     </button>

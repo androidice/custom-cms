@@ -39,7 +39,6 @@ export class UserService {
 
 
   register(data): Promise<User> {
-    debugger;
     return new Promise((resolve, reject)=>{
       this.afAuth.auth.createUserWithEmailAndPassword(data.email, data.password)
       .then((result)=> {
@@ -101,7 +100,6 @@ export class UserService {
       try {
         this.afAuth.auth.onAuthStateChanged((result)=> {
           if(result){
-            debugger;
             this.afStore.collection('users').doc(result.uid).ref.get()
             .then((doc) => {
               if(doc.exists){

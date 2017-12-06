@@ -13,12 +13,12 @@ export class UploadService {
 
   }
 
-  uploadProfileImage(user, img): Promise<boolean> {
+  uploadProfileImage(user, img): Promise<object> {
     return new Promise((resolve, reject)=>{
       try {
-        debugger;
         let storageRef = this.firebaseApp.storage().ref();
         let path = `/images/profile/${user.uid}`;
+        let imgSrc;
         var iRef = storageRef.child(path);
         iRef.putString(img.substr(img.indexOf(',') + 1) , 'base64', {contentType: 'image/png'})
           .then((snapshot)=> {
@@ -34,12 +34,17 @@ export class UploadService {
           .then(()=> {
               return this.getDownloadURL(path);
           })
-          .then((imgSrc)=> {
+          .then((_imgSrc)=> {
+              imgSrc = _imgSrc;
               return this.afStore.collection('users').doc(user.uid).update({
-              "profile.image.imgUrl": imgSrc
+              "profile.image.imgUrl": _imgSrc
               })
           }).then(()=>{
-            resolve(true);
+            resolve({
+                imgSrc,
+                status: true
+            }
+            );
           })
           .catch((error)=> {
             reject(error)
