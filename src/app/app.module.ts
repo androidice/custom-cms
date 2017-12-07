@@ -14,6 +14,7 @@ import { DashBoardModule } from './dashboard/dashboard.module';
 
 import { AppComponent } from './app.component';
 import { GrowlModule } from 'primeng/primeng';
+import { Angular2FontawesomeModule } from 'angular2-fontawesome/angular2-fontawesome';
 
 import { FooterComponent, HeaderComponent} from './shared/layout';
 
@@ -50,7 +51,8 @@ const rootRouting: ModuleWithProviders = RouterModule.forRoot([], { useHash: fal
     AngularFirestoreModule,
     rootRouting,
     SharedModule,
-    GrowlModule
+    GrowlModule,
+    Angular2FontawesomeModule
   ],
   exports: [RouterModule],
   providers: [

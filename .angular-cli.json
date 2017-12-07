@@ -22,7 +22,10 @@
       "styles": [
         "styles.css",
          "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-         "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css"
+         "../node_modules/ng2-toastr/bundles/ng2-toastr.min.css",
+         "../node_modules/primeng/resources/primeng.min.css",
+         "../node_modules/primeng/resources/themes/omega/theme.css",
+         "../node_modules/font-awesome/css/font-awesome.min.css"
       ],
       "scripts": [
         "../node_modules/jquery/dist/jquery.min.js",
@@ -35,7 +38,9 @@
       }
     }
   ],
-
+  "addons": [
+      "../node_modules/font-awesome/fonts/*.+(otf|eot|svg|ttf|woff|woff2)"
+  ],
   "e2e": {
     "protractor": {
       "config": "./protractor.conf.js"

@@ -29,6 +29,7 @@ export class AppComponent {
   }
 
   ngAfterViewInit() {
+    debugger;
     this.notificationService.toasterStatus.subscribe((message: Message) => {
       if(message) {
         this.objToaster.push(message);

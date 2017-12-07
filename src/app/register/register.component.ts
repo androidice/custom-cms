@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewContainerRef } from '@angular/core';
 import { Router } from '@angular/router';
-import { UserService } from  '../shared';
+import { UserService, NotificationService } from  '../shared';
 import { ToastsManager } from 'ng2-toastr/ng2-toastr';
 import { User } from '../shared/models';
 @Component({
@@ -13,6 +13,7 @@ export class RegisterComponent  {
   constructor(
     private router: Router,
     private userService: UserService,
+    private notificationService: NotificationService,
     public toastr: ToastsManager,
     vcr: ViewContainerRef
   ) {
@@ -26,11 +27,13 @@ export class RegisterComponent  {
     debugger;
     this.userService.register(this.user)
     .then((user)=> {
-      this.toastr.success('user has been successfully created', 'Success');
+      //this.toastr.success('user has been successfully created', 'Success');
+      this.notificationService.showToaster('success', 'Success', 'user has been successfully created');
       this.userService.setAuth(user);
       this.router.navigateByUrl('/dashboard');
     }, (error) => {
-      this.toastr.error(error.message, 'Error');
+    //  this.toastr.error(error.message, 'Error');
+    this.notificationService.showToaster('error', 'Error', error.message);
     });
   }
   ngOnInit() {
